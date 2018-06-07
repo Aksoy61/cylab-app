@@ -20,8 +20,8 @@ import '@polymer/app-route/app-location.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
+import '@polymer/iron-icon/iron-icon.js'
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import './my-icons.js';
 
 
 // Gesture events like tap and track generated from touch will not be
@@ -37,15 +37,22 @@ class MyApp extends PolymerElement {
     return html`
       <style>
         :host {
-          --app-primary-color: #4285f4;
+          --app-primary-color: #000000;
           --app-secondary-color: black;
 
           display: block;
         }
 
-
         app-drawer-layout:not([narrow]) [drawer-toggle] {
           display: none;
+        }
+
+        paper-icon-button{
+          --paper-icon-button-ink-color: white;
+        }
+
+        paper-icon-button + [main-title] {
+          margin-left: 24px;
         }
 
         app-header {
@@ -82,23 +89,16 @@ class MyApp extends PolymerElement {
       </app-route>
 
       <app-drawer-layout fullbleed="" narrow="{{narrow}}">
-        <!-- Drawer content -->
-        <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-          <app-toolbar>Menu</app-toolbar>
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <a name="homemain" href="[[rootPath]]homemain">Home Main</a>
-            <a name="registerlogin" href="[[rootPath]]registerlogin">Register Login</a>
-            <a name="challegeoverview" href="[[rootPath]]challengeoverview">Challenge Overview</a>
-          </iron-selector>
-        </app-drawer>
-
+      
         <!-- Main content -->
         <app-header-layout has-scrolling-region="">
-
           <app-header slot="header" condenses="" reveals="" effects="waterfall">
             <app-toolbar>
-              <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
-              <div main-title="">My App</div>
+              <paper-icon-button icon="menu" drawer-toggle=""></paper-icon-button>
+              <div main-title="">Cylab</div>
+              <paper-icon-button icon="delete"></paper-icon-button>
+              <paper-icon-button icon="search"></paper-icon-button>
+              <paper-icon-button icon="close"></paper-icon-button>
             </app-toolbar>
           </app-header>
 
@@ -108,7 +108,7 @@ class MyApp extends PolymerElement {
             <challenge-overview name="challengeoverview"></challenge-overview>
             <not-found name="notfound"></not-found>
           </iron-pages>
-        </app-header-layout>
+         </app-header-layout>
       </app-drawer-layout>
     `;
   }
@@ -137,7 +137,7 @@ class MyApp extends PolymerElement {
      // If no page was found in the route data, page will be an empty string.
      // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
     if (!page) {
-      this.page = 'homemain';
+      this.page = 'registerlogin';
     } else if (['homemain', 'registerlogin', 'challengeoverview'].indexOf(page) !== -1) {
       this.page = page;
     } else {

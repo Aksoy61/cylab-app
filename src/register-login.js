@@ -14,22 +14,47 @@ import './shared-styles.js';
 class RegisterLogin extends PolymerElement {
   static get template() {
     return html`
-      <style include="shared-styles">
-        :host {
-          display: block;
+      <custom-style>
+        <style include="shared-styles">
+          :host {
+            display: block;
 
-          padding: 10px;
-        }
-      </style>
+            padding: 10px;
+          }
 
+          .wrapper-btns {
+            margin-top: 15px;
+          }
+
+          paper-button.link {
+              color: #757575;
+          }
+
+        </style>
+      </custom-style>
+            
       <div class="card">
-        <div class="circle">2</div>
-        <h1>View Two</h1>
-        <p>Ea duis bonorum nec, falli paulo aliquid ei eum.</p>
-        <p>Id nam odio natum malorum, tibique copiosae expetenda mel ea.Detracto suavitate repudiandae no eum. Id adhuc minim soluta nam.Id nam odio natum malorum, tibique copiosae expetenda mel ea.</p>
+        <div id="unauthenticated">
+        <h1>Log In</h1>
+
+        <paper-loginscreen title="Login to" subtitle="webcomponents.org"></paper-loginscreen>
       </div>
+
     `;
   }
+
+  static get is() { return 'register-login'; }
+
+  static get properties() {
+    return {
+      formData: {
+        type: Object,
+        value: {}
+      }
+    }
+  }
+
+  
 }
 
 window.customElements.define('register-login', RegisterLogin);
